@@ -7,10 +7,14 @@ public class App {
     private ConsoleEventLogger consoleEventLogger;
 
     public void logEvent(String message) {
-
+        consoleEventLogger.logEvent(message);
     }
 
     public static void main(String[] args) {
+        App app = new App();
+        app.client = new Client();
+        app.consoleEventLogger = new ConsoleEventLogger();
 
+        app.logEvent("Test");
     }
 }
