@@ -7,7 +7,7 @@ public class App {
     private Client client;
     private EventLogger eventLogger;
 
-    public void logEvent(String message) {
+    private void logEvent(String message) {
         String msg = message.replaceAll(client.getId(), client.getFullName());
         eventLogger.logEvent(msg);
     }
@@ -18,5 +18,13 @@ public class App {
         app.eventLogger = new ConsoleEventLogger();
 
         app.logEvent("Some event for user 1");
+    }
+
+    public App(Client client, EventLogger eventLogger) {
+        this.client = client;
+        this.eventLogger = eventLogger;
+    }
+
+    public App() {
     }
 }
