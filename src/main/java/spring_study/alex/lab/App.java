@@ -1,7 +1,8 @@
 package spring_study.alex.lab;
 
 import lombok.NoArgsConstructor;
-import spring_study.alex.lab.logger.ConsoleEventLogger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring_study.alex.lab.logger.EventLogger;
 
 @NoArgsConstructor
@@ -15,11 +16,13 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App app = new App();
-        app.client = new Client("1", "John Smith");
-        app.eventLogger = new ConsoleEventLogger();
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-configuration.xml");
+
+        App app = (App) ctx.getBean("app");
 
         app.logEvent("Some event for user 1");
+        app.logEvent("Some event for user 2");
+        app.logEvent("Some event for user 3");
     }
 
     public App(Client client, EventLogger eventLogger) {
