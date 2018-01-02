@@ -2,7 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="client" class="spring_study.alex.lab.Client"/>
+    <bean id="client" class="spring_study.alex.lab.Client">
+        <constructor-arg value="1"/>
+        <constructor-arg value="John Smith"/>
+    </bean>
     <bean id="app" class="spring_study.alex.lab.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>

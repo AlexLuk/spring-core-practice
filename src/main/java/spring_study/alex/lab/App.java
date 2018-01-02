@@ -1,8 +1,10 @@
 package spring_study.alex.lab;
 
+import lombok.NoArgsConstructor;
 import spring_study.alex.lab.logger.ConsoleEventLogger;
 import spring_study.alex.lab.logger.EventLogger;
 
+@NoArgsConstructor
 public class App {
     private Client client;
     private EventLogger eventLogger;
@@ -23,8 +25,5 @@ public class App {
     public App(Client client, EventLogger eventLogger) {
         this.client = client;
         this.eventLogger = eventLogger;
-    }
-
-    public App() {
     }
 }
