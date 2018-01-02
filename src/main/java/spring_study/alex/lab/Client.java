@@ -11,4 +11,7 @@ public class Client {
         this.id = id;
         FullName = fullName;
     }
+
+    public Client() {
+    }
 }
