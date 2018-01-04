@@ -8,6 +8,7 @@ import org.springframework.context.support.GenericGroovyApplicationContext;
 import spring_study.alex.lab.logger.EventLogger;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -15,9 +16,11 @@ public class App {
     private Client client;
     private EventLogger eventLogger;
 
-    private void logEvent(String message) {
-        String msg = message.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(msg);
+    private void logEvent(Event event) {
+        event.setMessage(
+                event.getMessage().replaceAll(client.getId(), client.getFullName())
+        );
+        eventLogger.logEvent(event);
     }
 
     public static void main(String[] args) {
@@ -28,7 +31,9 @@ public class App {
 
         contexts.forEach(ctx -> {
             App app = ctx.getBean(App.class);
-            app.logEvent(ctx.getDisplayName() + "\tSome event for user 1");
+            Event event = new Event(new Date(System.currentTimeMillis()));
+            event.setMessage(ctx.getDisplayName() + "\tSome event for user 1");
+            app.logEvent(event);
         });
 
     }
