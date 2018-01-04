@@ -4,7 +4,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericGroovyApplicationContext;
 import spring_study.alex.lab.logger.EventLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 public class App {
@@ -17,13 +21,16 @@ public class App {
     }
 
     public static void main(String[] args) {
-//        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-configuration.xml");
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        App app = ctx.getBean(App.class);
+        List<ApplicationContext> contexts = new ArrayList<>();
+        contexts.add(new ClassPathXmlApplicationContext("spring-configuration.xml"));
+        contexts.add(new AnnotationConfigApplicationContext(AppConfig.class));
+        contexts.add(new GenericGroovyApplicationContext("spring-configuration.groovy"));
 
-        app.logEvent("Some event for user 1");
-        app.logEvent("Some event for user 2");
-        app.logEvent("Some event for user 3");
+        contexts.forEach(ctx -> {
+            App app = ctx.getBean(App.class);
+            app.logEvent(ctx.getDisplayName() + "\tSome event for user 1");
+        });
+
     }
 
     public App(Client client, EventLogger eventLogger) {
