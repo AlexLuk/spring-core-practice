@@ -2,6 +2,7 @@ package spring_study.alex.lab;
 
 import lombok.NoArgsConstructor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring_study.alex.lab.logger.EventLogger;
 
@@ -16,8 +17,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-configuration.xml");
-
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-configuration.xml");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         App app = ctx.getBean(App.class);
 
         app.logEvent("Some event for user 1");
