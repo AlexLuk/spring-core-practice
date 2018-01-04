@@ -4,6 +4,6 @@ import spring_study.alex.lab.Event;
 
 public class ConsoleEventLogger implements EventLogger {
     public void logEvent(Event event) {
-        System.out.println(event.getDate() + " " + event.getMessage());
+        System.out.println(event.toString());
     }
 }
